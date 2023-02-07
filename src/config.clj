@@ -6,6 +6,6 @@
   )
 
 (def valid-names
-  {:os      ["windows" "linux" "macosx"]
-   :java-os ["Windows 10" "Linux" "MAC OS X"]
-   :engines #{"Tensorflow" "Pytorch"}})
+  {:os           ["windows" "linux" "macosx"]
+   :java-os      ["Windows 10" "Linux" "MAC OS X"]
+   :engine-names ["Tensorflow" "Pytorch" "onnx"]})

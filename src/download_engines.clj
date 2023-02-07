@@ -13,4 +13,6 @@
   []
   (json/parse-string (fetch-json) true))
 
-(defn build-folder-name [])
+(defn build-folder-name [engine-entry])
+
+(defn download-file [json-entry])
