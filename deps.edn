@@ -1,0 +1,5 @@
+{:paths ["src" "test"]
+ :deps {babashka/fs {:mvn/version "0.2.15"}
+        babashka/babashka.curl {:mvn/version "0.1.2"}
+        cheshire/cheshire {:mvn/version "5.11.0"}
+ }
