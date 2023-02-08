@@ -35,21 +35,22 @@
      (fs/create-dirs folder)
      (download/byte-arr->file! folder byte-array file-name))))
 
-(defn print-download-info
-  "Downloads the file, prints information"
+(defn download-info
+  "Downloads the file, build download information in a dict"
   [timed-download]
-  (let [downloaded-file (:return timed-download)
-        info {:file-name  (fs/file-name downloaded-file)
-              :time-taken (:iso timed-download)
-              :file-size  (format "%.2f MB"
-                                  (/ (.length downloaded-file) (Math/pow 2 20)))}]
-    (ppr/pprint info)))
+  (let [downloaded-file (:return timed-download)]
+    {:file-name  (fs/file-name downloaded-file)
+     :time-taken (:iso timed-download)
+     :file-size  (format "%.2f MB"
+                         (/ (.length downloaded-file) (Math/pow 2 20)))}))
 
 (defn download-jars!
+  "Download the jars from a json entry. Print info verbosely"
   [{links :jars :as engine-entry}]
-  "Download the jars from a json entry"
   (let [folder (build-folder-name engine-entry)]
     (pmap #(-> (download-file! folder %)
                download/my-time
-               print-download-info) links)))
+               download-info
+               ppr/pprint) links)))
+
 

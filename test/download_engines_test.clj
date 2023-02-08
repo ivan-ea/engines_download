@@ -27,7 +27,9 @@
   )
 
 (deftest print-download-info-test
-  (let [print-dict (-> (download-file! config/)
+  (let [info-dict (-> (download-file! config/input-json-url)
                           download/my-time
-                          print-download-info)])
-  )
+                          download-info)]
+    (is (= (set (keys info-dict)) #{:file-name :time-taken :file-size}))
+    (is (= (:file-name info-dict) "availableDLVersions.json"))
+    (is (= (:file-size info-dict) (format "%.2f MB" 0.12)))))
