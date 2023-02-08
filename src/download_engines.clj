@@ -2,6 +2,7 @@
   (:require config
             download
             [clojure.string :as str]
+            [clojure.pprint :as ppr]
             [babashka.fs :as fs]
             [cheshire.core :as json]))
 
@@ -34,20 +35,21 @@
      (fs/create-dirs folder)
      (download/byte-arr->file! folder byte-array file-name))))
 
-(defn download-file!-&-info
-  "Downloads the file with time information"
+(defn print-download-info
+  "Downloads the file, prints information"
   [timed-download]
-
-  )
+  (let [downloaded-file (:return timed-download)
+        info {:file-name  (fs/file-name downloaded-file)
+              :time-taken (:iso timed-download)
+              :file-size  (format "%.2f MB"
+                                  (/ (.length downloaded-file) (Math/pow 2 20)))}]
+    (ppr/pprint info)))
 
 (defn download-jars!
   [{links :jars :as engine-entry}]
   "Download the jars from a json entry"
   (let [folder (build-folder-name engine-entry)]
-    (pmap (partial download-file! folder) links)))
+    (pmap #(-> (download-file! folder %)
+               download/my-time
+               print-download-info) links)))
 
-
-(defn build-engine-files
-  [engine-name ]
-  "Creates the correct folder
-  Downloads correct files")

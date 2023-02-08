@@ -25,3 +25,9 @@
     (let [file (download-file! config/input-json-url)]
       (is (fs/exists? file config/input-json-url))))
   )
+
+(deftest print-download-info-test
+  (let [print-dict (-> (download-file! config/)
+                          download/my-time
+                          print-download-info)])
+  )
