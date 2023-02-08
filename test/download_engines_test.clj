@@ -1,8 +1,8 @@
 (ns download-engines-test
   (:require config
             [download-engines :refer :all]
-            [clojure.test :refer :all])
-  )
+            [clojure.test :refer :all]
+            [babashka.fs :as fs]))
 
 (deftest parse-json-test
   (let [parsed (parse-json)
@@ -19,3 +19,9 @@
            "Tensorflow-1.12.0-1.12.0-windows-x86_64-cpu"))
     (is (= (build-folder-name (second parsed))
            "Tensorflow-1.12.0-1.12.0-windows-x86_64-cpu-gpu"))))
+
+(deftest download-file!-test
+  (testing "check 1 arg (url)"
+    (let [file (download-file! config/input-json-url)]
+      (is (fs/exists? file config/input-json-url))))
+  )

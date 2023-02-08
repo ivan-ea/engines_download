@@ -5,12 +5,10 @@
             [babashka.fs :as fs]
             [cheshire.core :as json]))
 
-(defn fetch-json "download the json as a string"
-  []
+(defn fetch-json "download the json as a string" []
   (slurp config/input-json-url))
 
-(defn parse-json "parse the json string"
-  []
+(defn parse-json "parse the json string" []
   (json/parse-string (fetch-json) true))
 
 (defn select-entry
@@ -27,17 +25,26 @@
     (if gpu (str base-name separator "gpu") base-name)))
 
 (defn download-file!
-  ([url] (download-file! (download/get-url-filename url) url))
-  ([file-name url] (download-file!  config/default-engines-folder file-name url))
-  ([folder file-name url]
+  ([url] (download-file! (download/get-url-filename url) config/default-engines-folder url))
+  ([parent-folder url]
+   (download-file! (download/get-url-filename url)
+                   (fs/file config/default-engines-folder parent-folder) url))
+  ([file-name folder url]
    (let [byte-array (:body (download/get-url-response url))]
      (fs/create-dirs folder)
      (download/byte-arr->file! folder byte-array file-name))))
 
-(defn download-files
-  [json-entry]
-  "download the jars from a json entry"
-  (  ))
+(defn download-file!-&-info
+  "Downloads the file with time information"
+  [timed-download]
+
+  )
+
+(defn download-jars!
+  [{links :jars :as engine-entry}]
+  "Download the jars from a json entry"
+  (let [folder (build-folder-name engine-entry)]
+    (pmap (partial download-file! folder) links)))
 
 
 (defn build-engine-files
