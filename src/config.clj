@@ -13,3 +13,12 @@
   {:os           ["windows" "linux" "macosx"]  ; this may not be needed
    :java-os      ["Windows 10" "Linux" "MAC OS X"]
    :engine-names ["Tensorflow" "Pytorch" "onnx"]})
+
+(def os-java-names
+  {"Windows 10" "windows-x86_64"
+   "Linux"      "linux-x86_64"
+   "MAC OS X"   "macosx-x86_64"})
+
+(def os-string (get os-java-names (System/getProperty "os.name")))
+
+(def interesting-versions ["1.15.0" "0.2.0" "0.3.3" "0.4.2" "1.13.0"])

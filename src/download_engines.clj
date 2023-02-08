@@ -12,6 +12,11 @@
 (defn parse-json "parse the json string" []
   (json/parse-string (fetch-json) true))
 
+(defn os-engines-vector []
+  "vector of engine entries, os compatible only"
+  (let [parsed (:versions (download-engines/parse-json))]
+    (filter #(= (:os %) config/os-string) parsed)))
+
 (defn select-entry
   "Selects the right entry, given the args (model I want)
   Input: dict of args"
