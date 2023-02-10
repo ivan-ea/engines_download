@@ -18,7 +18,15 @@
     (is (= (build-folder-name (first parsed))
            "Tensorflow-1.12.0-1.12.0-windows-x86_64-cpu"))
     (is (= (build-folder-name (second parsed))
-           "Tensorflow-1.12.0-1.12.0-windows-x86_64-cpu-gpu"))))
+           "Tensorflow-1.12.0-1.12.0-windows-x86_64-cpu-gpu"))
+    (is (= (build-folder-name {:engine "Tensorflow",
+                               :version "0.3.1",
+                               :pythonVersion "2.4.1",
+                               :os "windows-x86_64",
+                               :gpu false,
+                               :cpu true,
+                               :rosetta false})
+           "Tensorflow-2.4.1-0.3.1-windows-x86_64-cpu"))))
 
 (deftest download-file!-test
   (testing "check 1 arg (url)"

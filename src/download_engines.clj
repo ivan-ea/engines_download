@@ -27,7 +27,7 @@
   [engine-entry]
   (let [{:keys [engine version pythonVersion os gpu cpu]} engine-entry
         separator "-"
-        base-name (str/join separator [engine version pythonVersion os "cpu"])]
+        base-name (str/join separator [(str/capitalize engine) pythonVersion version os "cpu"])]
     (if gpu (str base-name separator "gpu") base-name)))
 
 (defn download-file!
