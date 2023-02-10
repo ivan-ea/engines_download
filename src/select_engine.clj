@@ -2,7 +2,6 @@
   (:require config
             [download-engines :as de]))
 
-
 (defn get-latest-version
   [engines-vector engine-name]
   (let [engines (filter #(= engine-name (:engine %)) engines-vector)]
