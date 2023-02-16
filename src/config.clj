@@ -21,4 +21,4 @@
 
 (def os-string (get os-java-names (System/getProperty "os.name")))
 
-(def interesting-versions ["1.15.0" "0.2.0" "0.3.3" "0.4.2" "1.13.0" "1.9.0"])
+(def interesting-versions ["1.15.0" "0.2.0" "0.3.3" "0.4.2" "1.13.0" "1.9.0" "1.9.1"])
