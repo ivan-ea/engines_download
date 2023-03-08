@@ -3,8 +3,8 @@
 
 ; new namings
 (def input-json-url
-  ;"https://raw.githubusercontent.com/bioimage-io/model-runner-java/main/src/main/resources/availableDLVersions.json"
-  "https://raw.githubusercontent.com/bioimage-io/model-runner-java/1bf3fd683cf670beeab303c8085f7b9d722217a2/src/main/resources/availableDLVersions.json"
+  "https://raw.githubusercontent.com/bioimage-io/model-runner-java/main/src/main/resources/availableDLVersions.json"
+  ;"https://raw.githubusercontent.com/bioimage-io/model-runner-java/1bf3fd683cf670beeab303c8085f7b9d722217a2/src/main/resources/availableDLVersions.json"
   )
 (def default-engines-folder (fs/file (System/getProperty "user.home")
                                      "blank_fiji" "Fiji.app" "engines"))
