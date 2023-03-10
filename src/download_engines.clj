@@ -17,11 +17,6 @@
   (let [parsed (:versions (download-engines/parse-json))]
     (filter #(= (:os %) config/os-string) parsed)))
 
-(defn select-entry
-  "Selects the right entry, given the args (model I want)
-  Input: dict of args"
-  [])
-
 (defn build-folder-name
   "Generates the folder name for a json entry"
   [engine-entry]

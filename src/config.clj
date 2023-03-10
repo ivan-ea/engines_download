@@ -10,9 +10,14 @@
                                      "blank_fiji" "Fiji.app" "engines"))
 
 (def valid-names
-  {:os           ["windows" "linux" "macosx"]  ; this may not be needed
+  {:os           ["windows" "linux" "macosx"]               ; this may not be needed
    :java-os      ["Windows 10" "Linux" "MAC OS X"]
    :engine-names ["Tensorflow" "Pytorch" "onnx"]})
+
+(def framework-names
+  {:pt   {:json "pytorch" :folder "Pytorch"}
+   :tf   {:json "tensorflow" :folder "Tensorflow"}
+   :onnx {:json "onnx" :folder "onnx"}})
 
 (def os-java-names
   {"Windows 10" "windows-x86_64"
