@@ -3,6 +3,6 @@
               :implements [download_engines.DownloadEngines])
   )
 
-(defn -downloadEngine [parent-folder framework version gpu?]
+(defn -downloadEngine [this parent-folder framework version gpu?]
   (println "hello world")
   false)
