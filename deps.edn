@@ -1,6 +1,15 @@
-{:paths ["src" "test"]
- :deps {babashka/fs {:mvn/version "0.2.15"}
-        babashka/babashka.curl {:mvn/version "0.1.2"}
-        cheshire/cheshire {:mvn/version "5.11.0"}
-        io.github.borkdude/deflet {:mvn/version "0.1.0"}
- }}
+{:paths ["src" "java" "target/classes" "test"]
+ :deps
+ {org.clojure/clojure    {:mvn/version "1.11.1"}
+  babashka/fs            {:mvn/version "0.2.15"}
+  babashka/babashka.curl {:mvn/version "0.1.2"}
+  cheshire/cheshire      {:mvn/version "5.11.0"}
+  }
+ :aliases
+ {:build
+  {:deps
+   {io.github.clojure/tools.build {:git/url "https://github.com/clojure/tools.build.git"
+                                   :git/tag "v0.6.8" :git/sha "d79ae84"}}
+   :ns-default build}
+  }
+ }
