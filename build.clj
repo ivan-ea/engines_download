@@ -3,7 +3,7 @@
     [babashka.fs :as fs]
     [clojure.tools.build.api :as b]))
 
-(def lib 'my/download-engines)
+(def lib 'ivan-ea/download-engines)
 (def version (format "0.1.%s" (b/git-count-revs nil)))
 (def class-dir "target/classes")
 (def basis (b/create-basis {:project "deps.edn"}))
@@ -14,6 +14,8 @@
   (b/delete {:path "target"}))
 
 (defn jcompile [_]
+  ; Does not work on windows PC
+  ; works on linux: Clojure CLI version 1.11.1.1208
   (b/javac {:src-dirs ["java"]
             :class-dir class-dir
             :basis basis
@@ -28,6 +30,9 @@
                 :src-dirs ["src"]})
   (b/copy-dir {:src-dirs ["src" "resources"]
                :target-dir class-dir})
+  (b/compile-clj {:basis basis
+                  :src-dirs ["src"]
+                  :class-dir class-dir})
   (b/jar {:class-dir class-dir
           :jar-file jar-file}))
 
@@ -45,7 +50,9 @@
 
 (defn uber [_]
   (clean nil)
-  (copy-classes nil)
+  (if (clojure.string/includes? (System/getProperty "os.name") "Windows")
+    (copy-classes nil)
+    (jcompile nil))
   (b/copy-dir {:src-dirs ["src" "resources"]
                :target-dir class-dir})
   (b/compile-clj {:basis basis
