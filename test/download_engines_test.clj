@@ -30,12 +30,12 @@
 
 (deftest download-file!-test
   (testing "check 1 arg (url)"
-    (let [file (download-file! config/input-json-url)]
+    (let [file (download-file! "out" config/input-json-url)]
       (is (fs/exists? file config/input-json-url))))
   )
 
 (deftest print-download-info-test
-  (let [info-dict (-> (download-file! config/input-json-url)
+  (let [info-dict (-> (download-file! "out" config/input-json-url)
                           download/my-time
                           download-info)]
     (is (= (set (keys info-dict)) #{:file-name :time-taken :file-size}))

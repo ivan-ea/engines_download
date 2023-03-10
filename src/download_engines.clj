@@ -26,14 +26,12 @@
     (if gpu (str base-name separator "gpu") base-name)))
 
 (defn download-file!
-  ([url] (download-file! (download/get-url-filename url) config/default-engines-folder url))
-  ([parent-folder url]
-   (download-file! (download/get-url-filename url)
-                   (fs/file config/default-engines-folder parent-folder) url))
-  ([file-name folder url]
-   (let [byte-array (:body (download/get-url-response url))]
-     (fs/create-dirs folder)
-     (download/byte-arr->file! folder byte-array file-name))))
+  "Download url file in a folder"
+  [parent-folder url]
+  (let [file-name (download/get-url-filename url)
+        byte-array (:body (download/get-url-response url))]
+    (fs/create-dirs parent-folder)
+    (download/byte-arr->file! parent-folder byte-array file-name)))
 
 (defn download-info
   "Downloads the file, build download information in a dict"
@@ -46,11 +44,12 @@
 
 (defn download-jars!
   "Download the jars from a json entry. Print info verbosely"
-  [{links :jars :as engine-entry}]
-  (let [folder (build-folder-name engine-entry)]
-    (pmap #(-> (download-file! folder %)
-               download/my-time
-               download-info
-               ppr/pprint) links)))
+  ([engine-entry] (download-jars! config/default-engines-folder engine-entry))
+  ([engines-folder {links :jars :as engine-entry}]
+   (let [sub-folder-name (build-folder-name engine-entry)]
+     (pmap #(-> (download-file! (fs/file engines-folder sub-folder-name) %)
+                download/my-time
+                download-info
+                ppr/pprint) links))))
 
 
