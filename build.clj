@@ -54,7 +54,7 @@
 
 (defn uber [_]
   (clean nil)
-  (if false #_(clojure.string/includes? (System/getProperty "os.name") "Windows")
+  (if (clojure.string/includes? (System/getProperty "os.name") "Windows")
     (copy-classes nil)
     (jcompile nil))
   (b/copy-dir {:src-dirs ["src" "resources"]
