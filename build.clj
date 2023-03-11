@@ -14,9 +14,12 @@
   (b/delete {:path "target"}))
 
 (defn jcompile [_]
-  ; Does not work on windows PC
+  ; Does not work on :
+  ;   - windows PC:
+  ;   - windows laptop:
+  ;     + Clojure CLI version 1.11.1.1165
+  ;     + Clojure CLI version (deps.clj) 1.11.1.1252
   ; works on linux: Clojure CLI version 1.11.1.1208
-  ; windows laptop: Clojure CLI version 1.11.1.1165
   (b/javac {:src-dirs ["java"]
             :class-dir class-dir
             :basis basis
@@ -51,7 +54,7 @@
 
 (defn uber [_]
   (clean nil)
-  (if (clojure.string/includes? (System/getProperty "os.name") "Windows")
+  (if false #_(clojure.string/includes? (System/getProperty "os.name") "Windows")
     (copy-classes nil)
     (jcompile nil))
   (b/copy-dir {:src-dirs ["src" "resources"]
