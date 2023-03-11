@@ -16,6 +16,7 @@
 (defn jcompile [_]
   ; Does not work on windows PC
   ; works on linux: Clojure CLI version 1.11.1.1208
+  ; windows laptop: Clojure CLI version 1.11.1.1165
   (b/javac {:src-dirs ["java"]
             :class-dir class-dir
             :basis basis
