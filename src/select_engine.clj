@@ -3,6 +3,7 @@
             [download-engines :as de]))
 
 (defn get-latest-version
+  ; TODO: fix this, this is wrong
   [engines-vector engine-name]
   (let [engines (filter #(= engine-name (:engine %)) engines-vector)]
     (second engines)))
