@@ -14,6 +14,7 @@
    :java-os      ["Windows 10" "Linux" "MAC OS X"]
    :engine-names ["Tensorflow" "Pytorch" "onnx"]})
 
+; todo now folders have lowercase names
 (def framework-names
   {:pt   {:json "pytorch" :folder "Pytorch"}
    :tf   {:json "tensorflow" :folder "Tensorflow"}
@@ -27,3 +28,18 @@
 (def os-string (get os-java-names (System/getProperty "os.name")))
 
 (def interesting-versions ["1.15.0" "0.2.0" "0.3.3" "0.4.2" "1.13.0" "1.9.0" "1.9.1"])
+
+(def engine-names
+  {:tf   "tensorflow"
+   :pt   "pytorch"
+   :onnx "onnx"})
+
+(def engines-versions "higher version of the engines (for backward compatibility"
+  {"tensorflow_2" "2.7.1"
+   "tensorflow_1" "1.15.0"
+   "onnx_1"       "1.11.0"
+   "pytorch_1"    "1.13.0"})
+
+(comment
+
+  )

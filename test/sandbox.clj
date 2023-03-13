@@ -1,5 +1,6 @@
 (ns sandbox
-  (:require [download-engines :as d-e]
+  (:require [config]
+            [download-engines :as d-e]
             [de-java-api :as java-api]
             [clojure.reflect :as cr]
             [clojure.pprint :as pp]
@@ -22,5 +23,10 @@
 
 ; test java api calls
 (comment
- (java-api/-downloadEngine nil "tensorflow" "2.7.4" false)
+  (java-api/-downloadEngine nil "tensorflow" "2.7.4" false)
+  )
+
+(comment
+  (map #(.substring % 0 (.lastIndexOf % "_")) (keys config/engines-versions))
+  (map #() config/engine-names)
   )
