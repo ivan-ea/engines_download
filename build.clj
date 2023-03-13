@@ -14,8 +14,8 @@
   (b/delete {:path "target"}))
 
 (defn jcompile [_]
-  ; Does not work on :
-  ;   - windows PC:
+  ; Does not work on:
+  ;   - windows PC: Clojure CLI version 1.11.1.1165
   ;   - windows laptop:
   ;     + Clojure CLI version 1.11.1.1165
   ;     + Clojure CLI version (deps.clj) 1.11.1.1252
