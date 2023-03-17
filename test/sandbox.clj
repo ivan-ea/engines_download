@@ -14,11 +14,22 @@
 
 (.great (Greeter.))
 
+(defn display-entry
+  "select the relevant keys for display"
+  ([entry]
+   (display-entry entry [:engine :version :pythonVersion :os :gpu :rossetta]))
+  ([entry selection-vector]
+   (select-keys entry selection-vector)))
+
 ; query the engines in the json
 (comment
   (def j (d-e/os-engines-vector))
   (def tf (filter #(and (not (:gpu %)) (= "tensorflow" (:engine %))) j))
+  (def tf-gpu (filter #(and (:gpu %) (= "tensorflow" (:engine %))) j))
+  (def pt (filter #(and (:gpu %) (= "pytorch" (:engine %))) j))
+  (def onnx (filter #(and (:gpu %) (= "onnx" (:engine %))) j))
   (count tf)
+  (map display-entry pt)
   )
 
 ; test java api calls
